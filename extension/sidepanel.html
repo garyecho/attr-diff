@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>属性对比台</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header>
+    <h1>属性对比台</h1>
+    <div class="header-meta">
+      <div class="legend">
+        <span><i class="dot d-diff"></i>同名值不同</span>
+        <span><i class="dot d-value"></i>重复值</span>
+        <span class="legend-hint">（完全相同的不标记）</span>
+      </div>
+      <div class="author">
+        <span class="author-line" title="开发者">Developer: Evelynn</span>
+        <span class="author-line" title="维护者">Maintainer: Young E</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <!-- ① Target 输入框 + 镜像高亮层 -->
+    <section class="box">
+      <h2>① Target</h2>
+      <div class="mirror-wrap">
+        <div class="mirror" id="targetMirror"></div>
+        <textarea id="targetInput" placeholder="每行一个属性，例如：&#10;品牌: 苹果&#10;颜色: 红色"></textarea>
+      </div>
+    </section>
+
+    <!-- ② Source 输入框 + 镜像高亮层 -->
+    <section class="box">
+      <h2>② Source</h2>
+      <div class="mirror-wrap">
+        <div class="mirror" id="sourceMirror"></div>
+        <textarea id="sourceInput" placeholder="每行一个属性，例如：&#10;品牌: 苹果&#10;重量: 500g"></textarea>
+      </div>
+    </section>
+
+    <!-- ③ Target 结果框 -->
+    <section class="box">
+      <h2>③ Target 结果</h2>
+      <ul id="targetResult" class="result-list"></ul>
+    </section>
+
+    <!-- ④ Source 结果框 -->
+    <section class="box">
+      <h2>④ Source 结果</h2>
+      <ul id="sourceResult" class="result-list"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <button id="copyDiffBtn">复制差异清单</button>
+    <button id="clearBtn">一键清空</button>
+  </footer>
+
+  <script src="aliases.js"></script>
+  <script src="compare.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "attr-diff",
+  "version": "0.3.0",
+  "private": true,
+  "author": "Evelynn",
+  "description": "Chrome 扩展：对比 target 与 source 的属性，高亮相同属性与重复属性值，并提取到结果框",
+  "scripts": {
+    "test": "node tests/test_compare.js && node tests/test_dom_cdp.mjs",
+    "test:extension": "node tests/test_extension_cdp.mjs",
+    "test:extension:headed": "HEADLESS=0 node tests/test_extension_cdp.mjs",
+    "gen:icon": "node scripts/gen_icon.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

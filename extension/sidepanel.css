@@ -1,0 +1,241 @@
+/* ===== 侧边栏整体 ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  padding: 8px 14px;
+  background: #4a6cf7;
+  color: #fff;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* 页头第二行：图例 + 作者信息（图例靠左，作者靠右） */
+.header-meta {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap; /* 面板过窄时自动换行，不溢出 */
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+/* 颜色图例 */
+.legend {
+  font-size: 11px;
+  color: #e8ecff;
+  display: flex;
+  gap: 12px;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.d-diff  { background: #b3d9ff; }
+.d-value { background: #ffd1e0; }
+
+.legend-hint {
+  color: #c9d2ff;
+}
+
+/* 作者信息：小号浅色，上下两行，贴 header-meta 右下角 */
+.author {
+  display: inline-flex;
+  flex-direction: column;   /* 上下排列 */
+  align-items: flex-end;    /* 文字右对齐 */
+  align-self: flex-end;     /* 贴容器底部 */
+  gap: 2px;
+  font-size: 10px;
+  color: #dbe3ff;
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+}
+
+.author-line {
+  white-space: nowrap;
+}
+
+/* ===== 四框 2x2 网格布局 ===== */
+main.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 两列 */
+  grid-template-rows: 1fr 1fr;    /* 两行 */
+  gap: 8px;
+  padding: 8px;
+  min-height: 0;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 0; /* 允许在网格里被压缩 */
+}
+
+.box h2 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+/* ===== 输入框 + 镜像高亮层 ===== */
+.mirror-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 文字层（textarea）和背景层（mirror）使用完全相同的字体与内边距，
+   保证逐行位置对齐 */
+textarea,
+.mirror {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font: 13px/20px ui-monospace, Consolas, monospace;
+  padding: 8px;
+  border: none;
+}
+
+textarea {
+  z-index: 2; /* 文字在最上层，正常显示 */
+  resize: none;
+  outline: none;
+  background: transparent;
+  color: #222;
+  overflow: auto;
+}
+
+.mirror {
+  z-index: 1; /* 高亮背景在文字下层 */
+  overflow: hidden;
+  pointer-events: none; /* 不拦截鼠标，点击仍由 textarea 接收 */
+  color: transparent;   /* 镜像里的文字不可见，只显示背景色 */
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 镜像层里每一行一个 div；空行也要占高度 */
+.mline {
+  min-height: 20px;
+}
+
+/* 命中高亮：蓝=同名值不同，粉=重复值（同名同值不标记） */
+.mline.h-diff  { background: #b3d9ff; }
+.mline.h-value { background: #ffd1e0; }
+
+/* 点击结果跳转时的闪烁动画 */
+.mline.flash {
+  animation: flashLine 1.2s ease-out;
+}
+
+@keyframes flashLine {
+  0%   { background: #ff7a45; }
+  100% { background: transparent; }
+}
+
+/* ===== 结果列表 ===== */
+.result-list {
+  flex: 1;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  overflow-y: auto;
+  font-size: 13px;
+  background: #fafbfc;
+  border-radius: 6px;
+}
+
+.result-list li {
+  padding: 4px 6px;
+  border-bottom: 1px dashed #e5e5e5;
+  cursor: pointer; /* 点击可跳转到输入框对应行 */
+}
+
+.result-list li:hover {
+  background: #eef2ff;
+}
+
+.result-list .empty-hint {
+  color: #aaa;
+  cursor: default;
+}
+
+/* 规则徽章（如：同名同值 / 跨对象值） */
+.result-list .badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 5px;
+  border-radius: 8px;
+  font-size: 10px;
+  line-height: 16px;
+  background: #4a6cf7;
+  color: #fff;
+}
+
+.author-line { margin-top: 4px; font-size: 10px; color: #ffffff; }
+
+/* ===== 底部按钮 ===== */
+footer {
+  padding: 8px;
+  border-top: 1px solid #e0e0e0;
+  background: #fff;
+  display: flex;
+  gap: 8px;
+}
+
+footer button {
+  flex: 1;
+  width: auto;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #f0f1f4;
+  color: #333;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+footer button:hover {
+  background: #e2e4ea;
+}
+
+/* 复制差异按钮用蓝色，与「同名值不同」高亮呼应 */
+#copyDiffBtn {
+  background: #4a6cf7;
+  color: #fff;
+}
+
+#copyDiffBtn:hover {
+  background: #3f5adb;
+}

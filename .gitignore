@@ -1,0 +1,10 @@
+# Node
+node_modules/
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+*.log
+
+# Chrome 临时配置（测试脚本生成）
+/tmp/
