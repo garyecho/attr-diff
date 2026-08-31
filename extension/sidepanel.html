@@ -53,14 +53,24 @@
     </section>
   </main>
 
-  <!-- ⑤ 主流鞋码对照表（页脚按钮展开/收起，默认收起） -->
+  <!-- ⑤ 主流鞋码对照表（页脚按钮展开/收起，成人/儿童切换，默认收起） -->
   <section id="sizeChart" class="size-chart" hidden>
     <div class="size-chart-head">
       <h2>主流鞋码对照表</h2>
       <span class="size-chart-note">脚长 mm = 中国新码 / 日码 / Mondopoint</span>
     </div>
-    <div class="table-wrap">
-      <table id="sizeTable"></table>
+    <div class="size-chart-tabs">
+      <button id="tabAdult" class="tab active" type="button">成人</button>
+      <button id="tabKids" class="tab" type="button">儿童</button>
+    </div>
+    <div class="table-wrap" id="wrapAdult">
+      <table id="sizeTable" class="size-table"></table>
+    </div>
+    <div id="wrapKids" hidden>
+      <p class="size-chart-kids-note">以 Nike 官方儿童尺码表为参考；儿童 US/UK 不分男女，儿童码与成人码非同一刻度，勿混用。大童 7Y（≈260mm）与成人男码 US 7 同号衔接。建议实测脚长加 5–10mm 成长空间再选码。</p>
+      <div class="table-wrap">
+        <table id="sizeTableKids" class="size-table"></table>
+      </div>
     </div>
     <p class="size-chart-tip">⚠ 以 Nike 等主流运动品牌官方尺码表为参考（英码不分男女）；不同品牌/鞋型可能有半码差异，购前请再查该品牌官网。鞋码只是起点，宽度、鞋型、脚型同样关键。点击行可高亮对照。</p>
   </section>

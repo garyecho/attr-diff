@@ -220,16 +220,19 @@ window.addEventListener('resize', () => {
 });
 runCompare();
 
-// ===== ⑤ 主流鞋码对照表（数据在 sizes.js） =====
+// ===== ⑤ 主流鞋码对照表（数据在 sizes.js：成人 SIZE_CHART / 儿童 SIZE_CHART_KIDS） =====
 const sizeChartBtn = document.getElementById('sizeChartBtn');
 const sizeChart    = document.getElementById('sizeChart');
+const tabAdult     = document.getElementById('tabAdult');
+const tabKids      = document.getElementById('tabKids');
+const wrapAdult    = document.getElementById('wrapAdult');
+const wrapKids     = document.getElementById('wrapKids');
 
-// 用 sizes.js 的 SIZE_CHART / SIZE_CHART_COLUMNS 渲染表格
-function renderSizeChart() {
-  const table = document.getElementById('sizeTable');
-  const head = SIZE_CHART_COLUMNS.map((c) => `<th>${esc(c.label)}</th>`).join('');
-  const rows = SIZE_CHART.map((r) => {
-    const tds = SIZE_CHART_COLUMNS.map((c) => {
+// 通用表格渲染：chart=数据数组，columns=列定义
+function renderSizeChart(table, chart, columns) {
+  const head = columns.map((c) => `<th>${esc(c.label)}</th>`).join('');
+  const rows = chart.map((r) => {
+    const tds = columns.map((c) => {
       const v = r[c.key];
       if (v === null || v === undefined) return '<td class="na">—</td>';
       return c.key === 'mm' ? `<td class="mm">${v}</td>` : `<td>${v}</td>`;
@@ -247,10 +250,24 @@ function renderSizeChart() {
   });
 }
 
-// 展开/收起对照表（首次展开时才渲染）
+// 成人/儿童标签切换
+function switchSizeTab(showKids) {
+  tabAdult.classList.toggle('active', !showKids);
+  tabKids.classList.toggle('active', showKids);
+  wrapAdult.hidden = showKids;
+  wrapKids.hidden = !showKids;
+}
+
+// 展开/收起对照表（首次展开时才渲染两张表）
 sizeChartBtn.addEventListener('click', () => {
   const willOpen = sizeChart.hidden;
   sizeChart.hidden = !willOpen;
   sizeChartBtn.textContent = willOpen ? '收起尺码表' : '📏 尺码对照表';
-  if (willOpen) renderSizeChart();
+  if (willOpen) {
+    renderSizeChart(document.getElementById('sizeTable'), SIZE_CHART, SIZE_CHART_COLUMNS);
+    renderSizeChart(document.getElementById('sizeTableKids'), SIZE_CHART_KIDS, SIZE_CHART_KIDS_COLUMNS);
+  }
 });
+
+tabAdult.addEventListener('click', () => switchSizeTab(false));
+tabKids.addEventListener('click', () => switchSizeTab(true));

@@ -277,21 +277,22 @@ footer button:hover {
   border-radius: 6px;
 }
 
-#sizeTable {
+/* 成人/儿童共用表格样式（两张表都带 .size-table 类，保持一致） */
+.size-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 11px;
   white-space: nowrap;
 }
 
-#sizeTable th,
-#sizeTable td {
+.size-table th,
+.size-table td {
   padding: 4px 8px;
   text-align: center;
   border: 1px solid #e8ebf2;
 }
 
-#sizeTable th {
+.size-table th {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -300,27 +301,27 @@ footer button:hover {
   font-weight: 600;
 }
 
-#sizeTable tbody tr:nth-child(even) {
+.size-table tbody tr:nth-child(even) {
   background: #f7f9fd;
 }
 
-#sizeTable tbody tr:hover {
+.size-table tbody tr:hover {
   background: #eef3ff;
   cursor: pointer;
 }
 
-#sizeTable tbody tr.selected {
+.size-table tbody tr.selected {
   background: #dbe7ff;
   outline: 1px solid #4a6cf7;
   outline-offset: -1px;
 }
 
-#sizeTable td.mm {
+.size-table td.mm {
   font-weight: 600;
   color: #4a6cf7;
 }
 
-#sizeTable td.na {
+.size-table td.na {
   color: #ccc;
 }
 
@@ -328,4 +329,39 @@ footer button:hover {
   margin: 8px 0 0;
   font-size: 10px;
   color: #a07b00;
+}
+
+/* 成人/儿童切换标签（胶囊样式） */
+.size-chart-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.size-chart-tabs .tab {
+  flex: 0 0 auto;
+  padding: 3px 14px;
+  border: 1px solid #d5dae6;
+  border-radius: 12px;
+  background: #f0f1f4;
+  color: #555;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.size-chart-tabs .tab:hover {
+  background: #e2e4ea;
+}
+
+.size-chart-tabs .tab.active {
+  background: #4a6cf7;
+  border-color: #4a6cf7;
+  color: #fff;
+}
+
+/* 儿童表上方说明行 */
+.size-chart-kids-note {
+  margin: 0 0 6px;
+  font-size: 10px;
+  color: #888;
 }
