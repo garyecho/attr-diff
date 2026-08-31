@@ -219,3 +219,38 @@ window.addEventListener('resize', () => {
   syncMirrorSize(sourceInput, sourceMirror);
 });
 runCompare();
+
+// ===== ⑤ 主流鞋码对照表（数据在 sizes.js） =====
+const sizeChartBtn = document.getElementById('sizeChartBtn');
+const sizeChart    = document.getElementById('sizeChart');
+
+// 用 sizes.js 的 SIZE_CHART / SIZE_CHART_COLUMNS 渲染表格
+function renderSizeChart() {
+  const table = document.getElementById('sizeTable');
+  const head = SIZE_CHART_COLUMNS.map((c) => `<th>${esc(c.label)}</th>`).join('');
+  const rows = SIZE_CHART.map((r) => {
+    const tds = SIZE_CHART_COLUMNS.map((c) => {
+      const v = r[c.key];
+      if (v === null || v === undefined) return '<td class="na">—</td>';
+      return c.key === 'mm' ? `<td class="mm">${v}</td>` : `<td>${v}</td>`;
+    }).join('');
+    return `<tr data-mm="${r.mm}">${tds}</tr>`;
+  }).join('');
+  table.innerHTML = `<thead><tr>${head}</tr></thead><tbody>${rows}</tbody>`;
+
+  // 点击行高亮选中（方便对照当前关注的尺码）
+  table.addEventListener('click', (e) => {
+    const tr = e.target.closest('tr[data-mm]');
+    if (!tr) return;
+    table.querySelectorAll('tbody tr.selected').forEach((el) => el.classList.remove('selected'));
+    tr.classList.add('selected');
+  });
+}
+
+// 展开/收起对照表（首次展开时才渲染）
+sizeChartBtn.addEventListener('click', () => {
+  const willOpen = sizeChart.hidden;
+  sizeChart.hidden = !willOpen;
+  sizeChartBtn.textContent = willOpen ? '收起尺码表' : '📏 尺码对照表';
+  if (willOpen) renderSizeChart();
+});

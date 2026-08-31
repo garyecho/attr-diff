@@ -239,3 +239,93 @@ footer button:hover {
 #copyDiffBtn:hover {
   background: #3f5adb;
 }
+
+/* ===== ⑤ 主流鞋码对照表（展开区） ===== */
+.size-chart {
+  margin: 0 8px 8px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.size-chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 8px;
+  margin-bottom: 6px;
+}
+
+.size-chart h2 {
+  margin: 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.size-chart-note {
+  font-size: 10px;
+  color: #888;
+}
+
+/* 表格容器：横向溢出滚动，纵向限高滚动（表头吸顶） */
+.table-wrap {
+  overflow: auto;
+  max-height: 300px;
+  border: 1px solid #e8ebf2;
+  border-radius: 6px;
+}
+
+#sizeTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+#sizeTable th,
+#sizeTable td {
+  padding: 4px 8px;
+  text-align: center;
+  border: 1px solid #e8ebf2;
+}
+
+#sizeTable th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #4a6cf7;
+  color: #fff;
+  font-weight: 600;
+}
+
+#sizeTable tbody tr:nth-child(even) {
+  background: #f7f9fd;
+}
+
+#sizeTable tbody tr:hover {
+  background: #eef3ff;
+  cursor: pointer;
+}
+
+#sizeTable tbody tr.selected {
+  background: #dbe7ff;
+  outline: 1px solid #4a6cf7;
+  outline-offset: -1px;
+}
+
+#sizeTable td.mm {
+  font-weight: 600;
+  color: #4a6cf7;
+}
+
+#sizeTable td.na {
+  color: #ccc;
+}
+
+.size-chart-tip {
+  margin: 8px 0 0;
+  font-size: 10px;
+  color: #a07b00;
+}

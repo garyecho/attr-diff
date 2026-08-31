@@ -16,7 +16,7 @@
       </div>
       <div class="author">
         <span class="author-line" title="开发者">Developer: Evelynn</span>
-        <span class="author-line" title="维护者">Maintainer: Young E</span>
+        <span class="author-line" title="维护者">Maintainer: Yong E</span>
       </div>
     </div>
   </header>
@@ -53,13 +53,27 @@
     </section>
   </main>
 
+  <!-- ⑤ 主流鞋码对照表（页脚按钮展开/收起，默认收起） -->
+  <section id="sizeChart" class="size-chart" hidden>
+    <div class="size-chart-head">
+      <h2>主流鞋码对照表</h2>
+      <span class="size-chart-note">脚长 mm = 中国新码 / 日码 / Mondopoint</span>
+    </div>
+    <div class="table-wrap">
+      <table id="sizeTable"></table>
+    </div>
+    <p class="size-chart-tip">⚠ 以 Nike 等主流运动品牌官方尺码表为参考（英码不分男女）；不同品牌/鞋型可能有半码差异，购前请再查该品牌官网。鞋码只是起点，宽度、鞋型、脚型同样关键。点击行可高亮对照。</p>
+  </section>
+
   <footer>
     <button id="copyDiffBtn">复制差异清单</button>
+    <button id="sizeChartBtn">📏 尺码对照表</button>
     <button id="clearBtn">一键清空</button>
   </footer>
 
   <script src="aliases.js"></script>
   <script src="compare.js"></script>
+  <script src="sizes.js"></script>
   <script src="sidepanel.js"></script>
 </body>
 </html>

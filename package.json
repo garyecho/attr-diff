@@ -1,6 +1,6 @@
 {
   "name": "attr-diff",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "author": "Evelynn",
   "description": "Chrome 扩展：对比 target 与 source 的属性，高亮相同属性与重复属性值，并提取到结果框",
