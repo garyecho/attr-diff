@@ -5,6 +5,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+*.pem
 
 # Chrome 临时配置（测试脚本生成）
 /tmp/
